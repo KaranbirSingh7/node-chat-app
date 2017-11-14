@@ -1,7 +1,7 @@
 # node-chat-app
 
 :zap:
-<a href="https://fierce-reaches-35986.herokuapp.com" target="_blank"> Chat Starts Here </a>
+<a target="_blank" href="https://fierce-reaches-35986.herokuapp.com" > Chat Starts Here </a>
 
 ## A Real time chat application developed using Sockets & Node.js
 
