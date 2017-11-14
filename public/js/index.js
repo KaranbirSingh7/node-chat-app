@@ -8,7 +8,6 @@ socket.on('connect', function () {
 });
 
 socket.on('disconnect', function () {
-	show.innerHTML = 'Disconnected';
 	console.log('Connection Refused by server');
 });
 
