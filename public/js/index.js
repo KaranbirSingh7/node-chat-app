@@ -3,7 +3,6 @@ var socket = io();
 var show = document.getElementById('socket-connection');
 
 socket.on('connect', function () {
-	show.innerHTML = 'Connected';
 	console.log('Connected to server');
 });
 
