@@ -1,9 +1,37 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset='utf-8'>
-	</head>
-	<body>
-		<h1>This is index.html</h1>
-	</body>
+
+<head>
+	<meta charset='utf-8'>
+	<!-- CSS -->
+	<link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body class="chat">
+
+	<div class="chat__sidebar">
+		<h3>People</h3>
+		<div id="users"></div>
+	</div>
+
+	<div class="chat__main">
+		<ol class="chat__messages" id="messages-list"></ol>
+
+		<div class="chat__footer">
+			<form id="message-form">
+				<input name="message-box" type="text" placeholder="Your message here" autofocus autocomplete="off" />
+				<button>Send</button>
+			</form>
+			<button id="send-location">Send Location</button>
+		</div>
+	</div>
+
+	<!--SOCKET/jQuery/JavaScript -->
+	<script src="/socket.io/socket.io.js"></script>
+	<!-- Load jQuery to use it in index-->
+	<script src="/js/libs/jquery-3.2.1.min.js"></script>
+
+	<script src="/js/index.js"></script>
+</body>
+
 </html>
