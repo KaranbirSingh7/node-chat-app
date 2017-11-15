@@ -27,6 +27,7 @@ io.on('connection', (socket) => {
 	socket.on('createMessage', (message, callback) => {
 		// TO ALL USERS 
 		io.emit('newMessage', generateMessage(message.from, message.text));
+		//CallBack will clear message box
 		callback();
 		// ALL EXCEPT SENDER
 		// socket.broadcast.emit('newMessage', {

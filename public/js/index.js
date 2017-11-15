@@ -1,6 +1,5 @@
 //Start connection
 var socket = io();
-var show = document.getElementById('socket-connection');
 
 socket.on('connect', function () {
 	console.log('Connected to server');
@@ -10,27 +9,6 @@ socket.on('disconnect', function () {
 	console.log('Connection Refused by server');
 });
 
-//---Listen to message from server
-socket.on('newMessage', function (message) {
-	var formattedTime = moment(message.createdAt).format('h:mm a');
-	var li = jQuery('<li></li>');
-	li.text(`${message.from} ${formattedTime} : ${message.text}`);
-	//Append to previous messages
-	jQuery('#messages-list').append(li);
-});
-
-socket.on('newLocationMessage', function (locationMessage) {
-	var formattedTime = moment(locationMessage.createdAt).format('h:mm a');
-	var li = jQuery('<li></li>');
-	var a = jQuery('<a target="_blank">My current location</a>');
-
-	li.text(`${locationMessage.from} ${formattedTime} : `);
-	//Attach location to message
-	a.attr("href", locationMessage.url);
-	//append link to message -> from : link
-	li.append(a);
-	jQuery('#messages-list').append(li);
-})
 
 //Form input handle
 jQuery('#message-form').on('submit', function (e) {
@@ -59,10 +37,10 @@ locationButton.on('click', function () {
 
 		//Button clicked ---Disable it to act it like fethcing data
 		locationButton.attr('disabled', 'disabled').text('Sending');
-		
+
 		navigator.geolocation.getCurrentPosition(function (location) {
-			locationButton.removeAttr('disabled').text('Send Location');	
-			
+			locationButton.removeAttr('disabled').text('Send Location');
+
 			socket.emit('createLocationMessage', {
 				latitude: location.coords.latitude,
 				longitude: location.coords.longitude
@@ -73,4 +51,41 @@ locationButton.on('click', function () {
 			alert('Unable to fetch location.')
 		});
 	}
+});
+
+//---Listen to message from server
+socket.on('newMessage', function (message) {
+	var formattedTime = moment(message.createdAt).format('h:mm a');
+	var template = jQuery("#message-template").html();
+	var html = Mustache.render(template, {
+		text: message.text,
+		from: message.from,
+		createdAt: formattedTime
+	});
+	jQuery("#messages-list").append(html);
+	// var formattedTime = moment(message.createdAt).format('h:mm a');
+	// var li = jQuery('<li></li>');
+	// li.text(`${message.from} ${formattedTime} : ${message.text}`);
+	// //Append to previous messages
+	// jQuery('#messages-list').append(li);
+});
+
+socket.on('newLocationMessage', function (locationMessage) {
+	var formattedTime = moment(locationMessage.createdAt).format('h:mm a');
+	var template = jQuery("#location-message-template").html();
+	var html = Mustache.render(template, {
+		url: locationMessage.url,
+		from: locationMessage.from,
+		createdAt: formattedTime
+	});
+
+	jQuery("#messages-list").append(html);
+	// var li = jQuery('<li></li>');
+	// var a = jQuery('<a target="_blank">My current location</a>');
+	// li.text(`${locationMessage.from} ${formattedTime} : `);
+	// //Attach location to message
+	// a.attr("href", locationMessage.url);
+	// //append link to message -> from : link
+	// li.append(a);
+	// jQuery('#messages-list').append(li);
 });

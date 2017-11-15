@@ -15,7 +15,8 @@
 	</div>
 
 	<div class="chat__main">
-		<ol class="chat__messages" id="messages-list"></ol>
+		<ol class="chat__messages" id="messages-list">
+		</ol>
 
 		<div class="chat__footer">
 			<form id="message-form">
@@ -26,13 +27,39 @@
 		</div>
 	</div>
 
-	<!--SOCKET/jQuery/JavaScript -->
-	<script src="/socket.io/socket.io.js"></script>
-	<!-- Load jQuery to use it in index-->
-	<script src="/js/libs/jquery-3.2.1.min.js"></script>
-	<!-- Moment Time Stamp Library -->
-	<script src="/js/libs/moment.js"></script>
+	<!-- Simple Message Template-->
+	<script id="message-template" type="text/template">
+		<li class="message">
+			<div class="message__title">
+				<h4>{{from}}</h4>
+				<span>{{createdAt}}</span>
+			</div>
+			<div class="message__body">
+				<p>{{text}}</p>
+			</div>
+		</li>
+	</script>
 
+	<!-- Location Message Template-->
+	<script id="location-message-template" type="text/template">
+		<li class="message">
+			<div class="message__title">
+				<h4>{{from}}</h4>
+				<span>{{createdAt}}</span>
+			</div>
+			<div class="message__body">
+				<p>
+				<a target="_blank" href="{{url}}">My Current Location</a>
+				</p>
+			</div>
+		</li>
+	</script>
+
+	<!--SOCKET/jQuery/Mustache/JavaScript -->
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/js/libs/jquery-3.2.1.min.js"></script>
+	<script src="/js/libs/moment.js"></script>
+	<script src="/js/libs/mustache.js"></script>
 	<script src="/js/index.js"></script>
 </body>
 
