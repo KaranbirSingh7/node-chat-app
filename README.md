@@ -1,4 +1,6 @@
-# node-chat-app
+# node-chat-app 
+
+[![Known Vulnerabilities](https://snyk.io/test/github/karanbirsingh7/node-chat-app/badge.svg?targetFile=package.json)](https://snyk.io/test/github/karanbirsingh7/node-chat-app?targetFile=package.json)
 
 :zap:
 <a target="_blank" href="https://fierce-reaches-35986.herokuapp.com" > Chat Starts Here </a>
